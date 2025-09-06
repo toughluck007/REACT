@@ -16,10 +16,11 @@
             <CheckBox x:Name="UseLocalMediaCheckbox" Margin="0,0,10,0">Use local media</CheckBox>
             <CheckBox x:Name="CreateRestorePointCheckbox">Create restore point</CheckBox>
         </StackPanel>
-        <TextBox x:Name="LogBox" Grid.Row="2" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox x:Name="LogBox" Grid.Row="2" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap" Visibility="Collapsed"/>
         <StackPanel Orientation="Horizontal" Grid.Row="3" VerticalAlignment="Bottom">
             <ProgressBar x:Name="ProgressBar" Width="200" Height="20" Margin="0,0,10,0"/>
             <TextBlock x:Name="StatusText" VerticalAlignment="Center"/>
+            <Button x:Name="ToggleConsoleButton" Margin="10,0,0,0">Show Console</Button>
         </StackPanel>
     </Grid>
 </Window>
