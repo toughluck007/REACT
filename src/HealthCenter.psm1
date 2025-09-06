@@ -27,6 +27,11 @@ function Start-LoggedProcess {
     }
     $proc.WaitForExit()
 
+    while (($line = $proc.StandardOutput.ReadLine()) -ne $null) {
+        if ($LogAction) {
+            & $LogAction $line
+        }
+    }
     while (($line = $proc.StandardError.ReadLine()) -ne $null) {
         if ($LogAction) {
             & $LogAction $line
@@ -41,7 +46,12 @@ function Invoke-SfcScan {
     param(
         [ScriptBlock]$LogAction
     )
+    if ($LogAction) { & $LogAction 'Running: sfc /scannow' }
     Start-LoggedProcess -FilePath "sfc.exe" -ArgumentList '/scannow' -LogAction $LogAction | Out-Null
+    if ($LogAction) { & $LogAction 'SFC scan complete. Parsing CBS log...' }
+    foreach ($line in Parse-CbsLog) {
+        if ($LogAction) { & $LogAction $line }
+    }
 }
 
 function Invoke-DismRestoreHealth {
